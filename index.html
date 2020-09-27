@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('ok');
+
+        // const obj = {
+            
+        //     go() {console.log('go')
+        //     return this;
+        // },
+
+        // go1() {console.log('go1')
+        //     return ;
+        // },
+        //     addLink(value) {
+        //         this.chain.push(value); 
+        //     },
+        //         finishChain() {
+        //        return this.chain;   
+        //     }
+        // }
+        const chainMaker = {
+            chain: [],
+            length: 0,
+            getLength() {
+                return this.chain.length;
+            },
+            addLink(value= null) {
+                 this.chain.push(value);   
+                 
+                 return this;
+            },
+            removeLink(position) {
+                this.chain.splice(position-1,1); 
+                return this;
+            },
+            reverseChain() {
+                this.chain.reverse();
+                return this;
+            },
+            finishChain() {
+                let chainString =''
+                this.chain.forEach((el, index) => {
+                    if (el === null ) chainString += `(  )`;
+                    else chainString += `( ${el} )`;
+                    if(index != this.chain.length-1)  chainString += `~~`;
+                })
+                this.chain = [];
+                return  chainString;
+            }
+        };
+
+      // console.log(chainMaker.addLink(1).addLink(2).addLink(3).finishChain());
+      // console.log(chainMaker.addLink(1).addLink(2).removeLink(1).addLink(3).finishChain());
+      console.log( chainMaker.addLink().addLink(2).reverseChain().addLink(3).finishChain());
+    </script>
+</body>
+
+</html>
