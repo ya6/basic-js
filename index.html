@@ -9,7 +9,7 @@
 
 <body>
     <script>
-        console.log('ok');
+        console.log(`'ok'`);
 
         // const obj = {
             
@@ -34,7 +34,7 @@
                 return this.chain.length;
             },
             addLink(value= null) {
-                 this.chain.push(value);   
+                this.chain.push('1');
                  
                  return this;
             },
@@ -47,14 +47,15 @@
                 return this;
             },
             finishChain() {
-                let chainString =''
+                let chainString ='';
                 this.chain.forEach((el, index) => {
                     if (el === null ) chainString += `(  )`;
                     else chainString += `( ${el} )`;
                     if(index != this.chain.length-1)  chainString += `~~`;
                 })
                 this.chain = [];
-                return  chainString;
+                
+                return    `'${chainString}'`;
             }
         };
 

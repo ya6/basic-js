@@ -3,41 +3,47 @@ const CustomError = require("../extensions/custom-error");
 const chainMaker = {
   chain: [],
   getLength() {
-    return this.chain.length;
+    return chainMaker.chain.length;
   },
-  addLink(value= "GIGIgi") {
-    this.chain.push(value);
+  addLink(value) {
+
+  // if(typeof value != "function"  )
+    chainMaker.chain.push(value);
+
     return this;
   },
   removeLink(position) {
+
+    if( !Number.isInteger(position)  || position <1 || position > chainMaker.chain.length)  chainMaker.chain = [];
+    if( !Number.isInteger(position)  || position <1 || position > chainMaker.chain.length)  throw "Error";
+
     try {
-      isInteger(position) && position>=0 && position<= this.chain.length;
-    } catch (error) {
-      this.chain = [];
-      this.chain = [];
+      Number.isInteger(position)  && position >=1 && position<= chainMaker.chain.length;
+    } catch (err) {
+     
+  
       console.error('error');
     
-      throw new CustomError('error');
       
     }
-    this.chain.splice(position-1,1); 
+    chainMaker.chain.splice(position-1,1); 
     return this;
   },
   reverseChain() {
-    this.chain.reverse();
+    chainMaker.chain.reverse();
     return this;
   },
   finishChain() {
-    let chainString ='';
-    this.chain.forEach((el, index) => {
-        if (el === 'GIGIgi' ) chainString += `(  )`;
-        else chainString += `( ${String(el)} )`;
+    let chainString =``;
+    chainMaker.chain.forEach((el, index) => {
+        if ( typeof el  == undefined ) chainString += `(  )`;
+        else chainString += `( ${(el)} )`;
       
-        if(index != this.chain.length-1)  chainString += `~~`;
+        if(index !== this.chain.length-1)  chainString += `~~`;
     });
    
     this.chain = [];
-    return  chainString
+    return  chainString;
   }
 };
 
