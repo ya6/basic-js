@@ -3,30 +3,11 @@ const CustomError = require("../extensions/custom-error");
 module.exports = function getSeason(date = null) {
   if (date === null) return 'Unable to determine the time of year!';
   
-  //if (!date instanceof Date) throw "Error";
 
-  try {
+  // if ({}.toString.call(date) !== '[object Date]') {
+  //   throw new Error();
+  // }
 
-    date.setFullYear('2020');
-  
-  } catch (err) {
-   
-    console.error('Error');
-   
-  }
-  
-  
-  try {
-
-    date instanceof Date;
-  
-  } catch (err) {
-  
-    console.error('Error');
-   
-  }
-
- 
 
   const base ={
     0: 'winter',
