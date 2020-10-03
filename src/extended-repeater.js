@@ -2,7 +2,7 @@ const CustomError = require("../extensions/custom-error");
 
 module.exports = function repeater(str,  options) {
 
- // options.separator = options.separator === undefined ? '+' : options.separator;
+  options.separator = options.separator === undefined ? '+' : options.separator;
  // options.additionSeparator = options.additionSeparator === undefined ? '|' : options.separator;
   let add='';
   if(true) {
