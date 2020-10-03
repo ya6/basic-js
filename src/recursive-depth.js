@@ -9,7 +9,7 @@ module.exports = class DepthCalculator {
     gofor(arr);
 
     function gofor(arr) {
-        console.log(arr)
+    
 
         d++;
 
@@ -21,9 +21,7 @@ module.exports = class DepthCalculator {
                 _arr.push(element);
             }
         });
-        console.log('--end--');
-        console.log(_arr);
-        console.log(_arr.length);
+       
         if (_arr.length > 0) {
             _arr = [].concat(..._arr);
             return gofor(_arr);
