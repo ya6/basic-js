@@ -11,6 +11,11 @@
 <button id='B'>ok</button>
 <p></p>
 
+<input type="text" id="S1">
+<input type="text" id="K1">
+<button id='B1'>ok</button>
+<p id='p1'></p>
+
 <body>
     <script>
         //attack at dawn!
@@ -56,11 +61,48 @@
 
                     rez += char;
                 }
-                rez =  (this.flag) ? rez : rez.split("").reverse().join("");
+                rez = (this.flag) ? rez : rez.split("").reverse().join("");
                 return rez;
 
             }
-            decrypt() {
+            decrypt(str, key) {
+                let _str = str.toUpperCase();
+                let _key = key.toUpperCase();
+                console.log('_str '+_str);
+
+                let __key = '';
+                let i = 0;
+                //  console.log(_key.length < _str.length)
+                if (_key.length < _str.length) {
+                    let rep = Math.ceil(_str.length / _key.length);
+                    _key = _key.repeat(rep);
+
+                    for (let index = 0; index < _str.length; index++) {
+                        if (_str.charCodeAt(index) >= 65 && _str.charCodeAt(index) <= 90) {
+                            __key += _key[i++];
+
+                        } else __key += _str[index];
+
+                    }
+                }
+                //   console.log('__key ' + __key);
+                let rez = '';
+              //  console.log(rez);
+                let char = 0;
+
+                for (let index = 0; index < str.length; index++) {
+                    if (_str.charCodeAt(index) >= 65 && _str.charCodeAt(index) <= 90) {
+                      //  console.log(  (_str.charCodeAt(index)) +'----'+ (__key.charCodeAt(index)));
+                        char = (_str.charCodeAt(index)) - (__key.charCodeAt(index)) + 65;
+                        if (char < 65) char += 26;
+                        char = String.fromCharCode(char);
+                      //  console.log (char);
+                    } else char = _str[index];
+
+                    rez += char;
+                }
+                rez = (this.flag) ? rez : rez.split("").reverse().join("");
+                return rez;
 
             }
         }
@@ -70,6 +112,9 @@
 
         console.log(directMachine.encrypt('attack at dawn!', 'alphonse'));
         console.log(reverseMachine.encrypt('attack at dawn!', 'alphonse'));
+
+        console.log(directMachine.decrypt('AEIHQX SX DLLU!', 'alphonse'));
+        console.log(reverseMachine.decrypt('AEIHQX SX DLLU!', 'alphonse'));
 
         function cod(str, key) {
             let _str = str.toUpperCase();
@@ -110,17 +155,28 @@
         }
         //LXFOPVEFRNHR
 
-
         let char = 0;
         //console.log(S.value, K.value.charCodeAt(0));
         let rez = document.querySelector('p');
         B.addEventListener('click', function () {
             char = (S.value.charCodeAt(0) - 65) + (K.value.charCodeAt(0));
             if (char > 90) char -= 26;
-            rez.innerText = String.fromCharCode(char) + ' ' + char;
+            rez.innerText = S.value.charCodeAt(0) + '--' + K.value.charCodeAt(0) + '--' + String.fromCharCode(
+                char) + ' ' + char;
         });
 
-      //  cod(str, key);
+
+        let char1 = 0;
+        //console.log(S.value, K.value.charCodeAt(0));
+        let rez1 = document.querySelector('#p1');
+        B1.addEventListener('click', function () {
+            char1 = (S1.value.charCodeAt(0)) - (K1.value.charCodeAt(0)) + 65;
+            if (char1 < 65) char1 += 26;
+            rez1.innerText = S1.value.charCodeAt(0) + '--' + K1.value.charCodeAt(0) + '--' + String
+                .fromCharCode(char1) + ' ' + char1;
+        });
+
+        //  cod(str, key);
 
 
         // const arr = [1, [5], 3, [2, [10, ['a', 'b']]]];
