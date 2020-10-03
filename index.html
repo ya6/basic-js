@@ -6,9 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<input type="text" id="S">
+<input type="text" id="K">
+<button id='B'>ok</button>
+<p></p>
 
 <body>
     <script>
+        //attack at dawn!
+        //alphon se alph
+
+        let str = 'attack at dawn!';
+        let key = 'alphonse';
+
+        class VigenereCipheringMachine {
+            constructor(flag) {
+                this.flag = (flag === false) ? false : true;
+            }
+            encrypt(str, key) {
+                let _str = str.toUpperCase();
+                let _key = key.toUpperCase();
+
+
+                let __key = '';
+                let i = 0;
+                //  console.log(_key.length < _str.length)
+                if (_key.length < _str.length) {
+                    let rep = Math.ceil(_str.length / _key.length);
+                    _key = _key.repeat(rep);
+
+                    for (let index = 0; index < _str.length; index++) {
+                        if (_str.charCodeAt(index) >= 65 && _str.charCodeAt(index) <= 90) {
+                            __key += _key[i++];
+
+                        } else __key += _str[index];
+
+                    }
+                }
+                //   console.log('__key ' + __key);
+                let rez = '';
+                let char = 0;
+
+                for (let index = 0; index < str.length; index++) {
+                    if (_str.charCodeAt(index) >= 65 && _str.charCodeAt(index) <= 90) {
+                        char = (_str.charCodeAt(index) - 65) + (__key.charCodeAt(index));
+                        if (char > 90) char -= 26;
+                        char = String.fromCharCode(char);
+                    } else char = _str[index];
+
+                    rez += char;
+                }
+                rez =  (this.flag) ? rez : rez.split("").reverse().join("");
+                return rez;
+
+            }
+            decrypt() {
+
+            }
+        }
+
+        const directMachine = new VigenereCipheringMachine();
+        const reverseMachine = new VigenereCipheringMachine(false);
+
+        console.log(directMachine.encrypt('attack at dawn!', 'alphonse'));
+        console.log(reverseMachine.encrypt('attack at dawn!', 'alphonse'));
+
+        function cod(str, key) {
+            let _str = str.toUpperCase();
+            let _key = key.toUpperCase();
+
+
+            let __key = '';
+            let i = 0;
+            //  console.log(_key.length < _str.length)
+            if (_key.length < _str.length) {
+                let rep = Math.ceil(_str.length / _key.length);
+                _key = _key.repeat(rep);
+
+                for (let index = 0; index < _str.length; index++) {
+                    if (_str.charCodeAt(index) >= 65 && _str.charCodeAt(index) <= 90) {
+                        __key += _key[i++];
+
+                    } else __key += _str[index];
+
+                }
+            }
+            //   console.log('__key ' + __key);
+            let rez = '';
+            let char = 0;
+
+            for (let index = 0; index < str.length; index++) {
+                if (_str.charCodeAt(index) >= 65 && _str.charCodeAt(index) <= 90) {
+                    char = (_str.charCodeAt(index) - 65) + (__key.charCodeAt(index));
+                    if (char > 90) char -= 26;
+                    char = String.fromCharCode(char);
+                } else char = _str[index];
+
+                rez += char;
+            }
+
+            console.log(rez);
+
+        }
+        //LXFOPVEFRNHR
+
+
+        let char = 0;
+        //console.log(S.value, K.value.charCodeAt(0));
+        let rez = document.querySelector('p');
+        B.addEventListener('click', function () {
+            char = (S.value.charCodeAt(0) - 65) + (K.value.charCodeAt(0));
+            if (char > 90) char -= 26;
+            rez.innerText = String.fromCharCode(char) + ' ' + char;
+        });
+
+      //  cod(str, key);
+
+
         // const arr = [1, [5], 3, [2, [10, ['a', 'b']]]];
         // const arr1 = [1,[] ];
 
@@ -89,41 +203,40 @@
 
         // //let calc = new DepthCalculator;
         // console.log(calculateDepth(arr1));
-const str = 'STRING';
-const options =  { 
-    repeatTimes: 3,
-    separator: '**',
-    addition: 'PLUS', 
-    additionRepeatTimes: 3, 
-    additionSeparator: '00' };
+        // const str = 'STRING';
+        // const options =  { 
+        //     repeatTimes: 3,
+        //     separator: '**',
+        //     addition: 'PLUS', 
+        //     additionRepeatTimes: 3, 
+        //     additionSeparator: '00' };
 
-    // STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS
-    
+        //     // STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS
 
-function repeater(str,  options ) {
-    options.separator = options.separator === undefined ? '+' : options.separator;
-    options.additionSeparator = options.additionSeparator === undefined ? '|' : options.separator;
- console.log(options.separator);
- let add='';
-    for (let index = 0; index < options.additionRepeatTimes; index++) {
-       add +=options.addition;
-       if(index<options.additionRepeatTimes-1)  add +=  options.additionSeparator;
-        
-    }
 
- let rez ='';
- for (let index = 0; index < options.repeatTimes; index++) {
-    rez += str+add;
-    if(index<options.repeatTimes-1)  rez +=  options.separator;
-        
- }
-   
-    return rez;
-    
-}
+        // function repeater(str,  options ) {
+        //     options.separator = options.separator === undefined ? '+' : options.separator;
+        //     options.additionSeparator = options.additionSeparator === undefined ? '|' : options.additionSeparator;
+        //  console.log(options.separator);
+        //  let add='';
+        //     for (let index = 0; index < options.additionRepeatTimes; index++) {
+        //        add +=options.addition;
+        //        if(index<options.additionRepeatTimes-1)  add +=  options.additionSeparator;
 
-console.log(repeater('la', { repeatTimes: 3 }));
+        //     }
 
+        //  let rez ='';
+        //  for (let index = 0; index < options.repeatTimes; index++) {
+        //     rez += str+add;
+        //     if(index<options.repeatTimes-1)  rez +=  options.separator;
+
+        //  }
+
+        //     return rez;
+
+        // }
+
+        // console.log(repeater('la', { repeatTimes: 3 }));
     </script>
 </body>
 
